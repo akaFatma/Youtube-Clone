@@ -1,0 +1,62 @@
+.side-bar{
+    width: 15%;
+    background-color: #fff;
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    padding-left: 2%;
+    padding-top: 80px;
+}
+.shortcuts img{
+    width: 20px;
+    margin-right:20px ;
+
+}
+.links {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    width: fit-content;
+    flex-wrap: wrap;
+    cursor: pointer;
+
+}
+.side-bar hr{
+    height: 1px;
+    border: 0;
+    background: #ccc;
+    width: 85%;
+    margin-bottom: 20px;
+}
+
+.subscribed-list h3{
+    font-size: 13px;
+    margin:  20px 0;
+    color: #5a5a5a;
+}
+.subscribed-list img{
+    width: 25px;
+    border-radius: 50%;
+    margin-right: 20px;
+}
+.side-link div{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #5a5a5a;
+    cursor: pointer;
+}
+.small-side-bar{
+    width: 5%;
+}
+.small-side-bar p{
+    display: none;
+}
+.small-side-bar h3{
+    display: none;
+}
+.small-side-bar hr{
+    width: 50%;
+    margin-bottom: 20px;
+}
+

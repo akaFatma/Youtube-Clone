@@ -1,0 +1,41 @@
+nav{
+    justify-content: space-between;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 10px 2%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+}
+.menu-icon{
+    width: 22px;
+    margin-right: 25px;
+
+}
+.logo{
+    width: 130px;
+}
+.search-box{
+    border: 1px solid  #ccc;
+    margin-right: 15px;
+    padding: 8px 12px;
+    border-radius:  25px;
+}
+.search-box input{
+    width: 400px;
+    background: transparent;
+    border: 0;
+    outline: 0;
+
+}
+.search-box img{
+    width: 15px;
+}
+.nav-right img{
+    width: 25px;
+    margin-right: 24px;
+}
+.nav-right .user{
+    border-radius: 50%;
+}
