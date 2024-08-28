@@ -10,7 +10,12 @@ import thumbnail7 from '../../assets/thumbnail7.png'
 import thumbnail8 from '../../assets/thumbnail8.png'
 import { Link } from 'react-router-dom'
 
-const Feed = () => {
+const Feed = (category) => {
+  
+    const fetchData=
+
+
+
   return (
     <div className="feed">
     <Link to ={`video/10/6276`} className='card'>
