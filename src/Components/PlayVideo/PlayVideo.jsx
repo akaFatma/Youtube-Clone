@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './PlayVideo.css'
-import video from '../../assets/video.mp4'
 import like from '../../assets/like.png'
 import dislike from '../../assets/dislike.png'
 import share from '../../assets/share.png'
@@ -14,27 +13,37 @@ const PlayVideo = ({videoId}) => {
 
 
     const [apiData,setApiData]=useState(null);
+    const [channelData,setChannelData]=useState(null);
     
-    const fetchVidepData = async()=>{
+    const fetchVideoData = async()=>{
         //fetching videos data
-        const videoDetails_url= `//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`
+        const videoDetails_url= `//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
        
         await fetch(videoDetails_url)
               .then(resp=>resp.json())
               .then(data =>setApiData(data.items));
     }
+
     useEffect(()=>{
-        fetchVidepData();
+        fetchVideoData();
     },[videoId])
 
- co
+   const fetcOtherData = async()=>{
+    const channelDataUrl =`//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`;
+
+    await fetch(channelData)
+          .then(response =>response.json())
+          .then(data=>setChannelData(data.items));
+   }
 
   return (
     <div className="play-video">
      
         <iframe  src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
-        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-        <h3>{apiData? apiData.snippet.title : "title here"}</h3>
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+        </iframe>
+        <h3>{apiData ? apiData.snippet.title : "title here"}</h3>
         <div className="play-video-info">
             <p>100k &bull; 2 days ago</p>
             <div className="stats">
