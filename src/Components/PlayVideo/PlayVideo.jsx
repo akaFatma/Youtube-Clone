@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './PlayVideo.css'
 import video from '../../assets/video.mp4'
 import like from '../../assets/like.png'
@@ -7,12 +7,34 @@ import share from '../../assets/share.png'
 import jack from '../../assets/jack.png'
 import save from '../../assets/save.png'
 import user from '../../assets/user_profile.jpg'
+import { API_KEY } from '../../data'
+import { json } from 'react-router-dom'
 
-const PlayVideo = () => {
+const PlayVideo = ({videoId}) => {
+
+
+    const [apiData,setApiData]=useState(null);
+    
+    const fetchVidepData = async()=>{
+        //fetching videos data
+        const videoDetails_url= `//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`
+       
+        await fetch(videoDetails_url)
+              .then(resp=>resp.json())
+              .then(data =>setApiData(data.items));
+    }
+    useEffect(()=>{
+        fetchVidepData();
+    },[videoId])
+
+
+
   return (
     <div className="play-video">
-        <video src={video} controls autoPlay muted></video>
-        <h3>Best youtube channel to learn web dev</h3>
+     
+        <iframe  src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h3>{apiData? apiData.snippet.title : "title here"}</h3>
         <div className="play-video-info">
             <p>100k &bull; 2 days ago</p>
             <div className="stats">
