@@ -54,8 +54,7 @@ const PlayVideo = ({videoId}) => {
         <div className="play-video-info">
             <p>{apiData?valueConverter(apiData.statistics.viewCount) : "no views"} &bull; {apiData ? moment(apiData.snippet.publishedAt).fromNow() : ""}</p>
             <div className="stats">
-                <span><img src={like} alt="" />10k likes</span>
-                <span><img src={dislike} alt="" />1k dislikes</span>
+                <span><img src={like} alt="" />{apiData? valueConverter(apiData.statistics.likeCount) : "nolike"}</span>
                 <span><img src={share} alt="" />Share</span>
                 <span><img src={save} alt="" />Save</span> 
             </div>
@@ -64,16 +63,16 @@ const PlayVideo = ({videoId}) => {
         <div className="publisher">
             <img src={jack} alt="" />
             <div>
-                <p>GreatStack</p>
+                <p>{apiData? apiData.snippet.channelTitle : ""}</p>
                 <span>1M subscribers</span>
             </div>
             <button>Subscribe</button>
         </div>
         <div className="vid-description">
-            <p>Channel that makes coding easy</p>
-            <p>Subscribe to GreatStack to watch more tutorials on web dev</p>
+           
+            <p>{apiData? apiData.snippet.description.slice(0,250) : "no description"}</p>
             <hr />
-            <h4>130 comments</h4>
+            <h4>{apiData? valueConverter(apiData.statistics.commentCount ): "none"}</h4>
             <div className="comment">
                 <img src={user} alt="" />
                 <div>
