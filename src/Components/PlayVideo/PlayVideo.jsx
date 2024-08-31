@@ -8,6 +8,9 @@ import save from '../../assets/save.png'
 import user from '../../assets/user_profile.jpg'
 import { API_KEY } from '../../data'
 import { json } from 'react-router-dom'
+import { valueConverter } from '../../data'
+import moment from 'moment'; 
+
 
 const PlayVideo = ({videoId}) => {
 
@@ -17,24 +20,28 @@ const PlayVideo = ({videoId}) => {
     
     const fetchVideoData = async()=>{
         //fetching videos data
-        const videoDetails_url= `//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
+        const videoDetails_url= `https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`;
        
         await fetch(videoDetails_url)
               .then(resp=>resp.json())
-              .then(data =>setApiData(data.items));
+              .then(data =>setApiData(data.items[0]));
     }
 
     useEffect(()=>{
         fetchVideoData();
-    },[videoId])
+    },[])
 
    const fetcOtherData = async()=>{
-    const channelDataUrl =`//youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`;
+    const channelDataUrl =`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`;
 
-    await fetch(channelData)
+    await fetch(channelDataUrl)
           .then(response =>response.json())
           .then(data=>setChannelData(data.items));
    }
+   useEffect(()=>{
+    fetcOtherData();
+},[])
+
 
   return (
     <div className="play-video">
@@ -45,7 +52,7 @@ const PlayVideo = ({videoId}) => {
         </iframe>
         <h3>{apiData ? apiData.snippet.title : "title here"}</h3>
         <div className="play-video-info">
-            <p>100k &bull; 2 days ago</p>
+            <p>{apiData?valueConverter(apiData.statistics.viewCount) : "no views"} &bull; {moment(apiData.snippet.publishedAt).fromNow()}</p>
             <div className="stats">
                 <span><img src={like} alt="" />10k likes</span>
                 <span><img src={dislike} alt="" />1k dislikes</span>
