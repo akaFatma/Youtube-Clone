@@ -36,7 +36,7 @@ const PlayVideo = ({videoId}) => {
 
     await fetch(channelDataUrl)
           .then(response =>response.json())
-          .then(data=>setChannelData(data.items));
+          .then(data=>setChannelData(data.items[0]));
    }
    useEffect(()=>{
     fetcOtherData();
@@ -52,7 +52,7 @@ const PlayVideo = ({videoId}) => {
         </iframe>
         <h3>{apiData ? apiData.snippet.title : "title here"}</h3>
         <div className="play-video-info">
-            <p>{apiData?valueConverter(apiData.statistics.viewCount) : "no views"} &bull; {moment(apiData.snippet.publishedAt).fromNow()}</p>
+            <p>{apiData?valueConverter(apiData.statistics.viewCount) : "no views"} &bull; {apiData ? moment(apiData.snippet.publishedAt).fromNow() : ""}</p>
             <div className="stats">
                 <span><img src={like} alt="" />10k likes</span>
                 <span><img src={dislike} alt="" />1k dislikes</span>
