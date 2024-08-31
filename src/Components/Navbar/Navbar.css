@@ -39,3 +39,19 @@ nav{
 .nav-right .user{
     border-radius: 50%;
 }
+ @media (max-width: 900px){
+    .menu-icon{
+        display: none;
+    }
+    .nav-right img{
+        display: none;
+    }
+    .nav-right .user{
+        display: block;
+        width: 30px;
+    }
+    .logo{
+        width: 90px;
+    }
+    
+ }
